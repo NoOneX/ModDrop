@@ -1,0 +1,8 @@
+name: GlassDropPlugin
+main: de.noonex.glassdropplugin.GlassDropPlugin
+version: 0.1 early state
+
+commands:
+    glassdrop:
+        description: Enable or disable glass drops.
+        usage: /glassdrop
