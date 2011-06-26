@@ -2,10 +2,10 @@ package de.noonex.glassdropplugin;
 
 import java.util.logging.Logger;
 
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockListener;
-import org.bukkit.inventory.ItemStack;
 
 public class GlassDropPluginListener extends BlockListener
 {
@@ -21,14 +21,19 @@ public class GlassDropPluginListener extends BlockListener
 	@Override
 	public void onBlockBreak(BlockBreakEvent event)
 	{
+		//TODO: Dropglass in Konfigurationsdatei speichern
 		if(dropglass)
 		{
+			//TODO: Andere Blöcke per Konfigurationsdatei
+			//Per Compositing-Pattern o.ä., je nach Block einen Befehl hinzu, quasi Events
+			//mehrere Drops, also Liste mit Drops, Format DropID:Anzahl
 			if(event.getBlock().getType() == Material.GLASS)
 			{
 				Material blockmaterial = event.getBlock().getType();
-				ItemStack droppedItem = new ItemStack(blockmaterial, 1);
+				Drop drop = new Drop(1, blockmaterial);
+				Location dropLocation = event.getBlock().getLocation();
 				
-				event.getPlayer().getInventory().addItem(droppedItem);
+				drop.CreateDrop(dropLocation, dropLocation.getWorld());
 			}
 		}
 	}
