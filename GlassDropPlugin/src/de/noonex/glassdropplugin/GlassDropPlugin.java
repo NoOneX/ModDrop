@@ -17,6 +17,7 @@ public class GlassDropPlugin extends JavaPlugin
 {
 	private Logger log = null;
 	private PluginManager pm;
+	ConfigurationManager configManager;
 	private Server server;
 	
 	Boolean dropglass;
@@ -26,6 +27,7 @@ public class GlassDropPlugin extends JavaPlugin
 	@Override
 	public void onDisable()
 	{
+		configManager.SaveConfiguration();
 		log.info("GlassDropPlugin disabled.");
 	}
 
@@ -37,7 +39,11 @@ public class GlassDropPlugin extends JavaPlugin
 		dropglass = false;
 		server = getServer();
 		
-		stpBlockListener = new GlassDropPluginListener(log, dropglass);
+		configManager = new ConfigurationManager(getConfiguration());
+		
+		stpBlockListener = new GlassDropPluginListener(log, dropglass, configManager.getDropList());
+		dropglass = configManager.getDropglass();
+		stpBlockListener.setDropGlass(dropglass);
 		
 		pm = server.getPluginManager();
 		pm.registerEvent(Type.BLOCK_BREAK, stpBlockListener, Event.Priority.Lowest, this);
@@ -48,7 +54,7 @@ public class GlassDropPlugin extends JavaPlugin
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args)
 	{
-		if(!cmd.getName().equalsIgnoreCase("glassdrop"))
+		if(!cmd.getName().equalsIgnoreCase("glassdrop") && !cmd.getName().equalsIgnoreCase("refreshglassdrop"))
 		{
 			return false;
 		}
@@ -66,12 +72,21 @@ public class GlassDropPlugin extends JavaPlugin
 			return true;
 		}
 		
+		//TODO: Provisorisch
+		if(cmd.getName().equalsIgnoreCase("refreshglassdrop"))
+		{
+			this.configManager.LoadConfiguration();
+			stpBlockListener.RefreshDroplist(this.configManager.getDropList());
+			return true;
+		}
+		
 		String playerName = player.getName();
 		String state, message, servermessage;
 		
 		dropglass = !dropglass;
 		state = dropglass ? "an" : "aus";
 		stpBlockListener.setDropGlass(dropglass);
+		configManager.setDropglass(dropglass);
 		
 		//TODO: Braucht ein einzelner Spieler diese Nachricht überhaupt?
 		message = String.format("%sGlassDrop ist nun %s%s%s.", ChatColor.GOLD, ChatColor.AQUA, state, ChatColor.GOLD);

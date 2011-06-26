@@ -1,9 +1,9 @@
 package de.noonex.glassdropplugin;
 
+import java.util.HashMap;
 import java.util.logging.Logger;
 
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockListener;
 
@@ -11,29 +11,26 @@ public class GlassDropPluginListener extends BlockListener
 {
 	Logger serverLog;
 	Boolean dropglass;
+	HashMap<Integer, AbstractDrop> droplist;
 
-	public GlassDropPluginListener(Logger log, Boolean dropglass)
+	public GlassDropPluginListener(Logger log, Boolean dropglass, HashMap<Integer, AbstractDrop> droplist)
 	{
 		this.serverLog = log;
 		this.dropglass = dropglass;
+		this.droplist = droplist;
 	}
 
 	@Override
 	public void onBlockBreak(BlockBreakEvent event)
 	{
-		//TODO: Dropglass in Konfigurationsdatei speichern
 		if(dropglass)
 		{
-			//TODO: Andere Blöcke per Konfigurationsdatei
-			//Per Compositing-Pattern o.ä., je nach Block einen Befehl hinzu, quasi Events
-			//mehrere Drops, also Liste mit Drops, Format DropID:Anzahl
-			if(event.getBlock().getType() == Material.GLASS)
+			int blockID = event.getBlock().getTypeId();
+			if(droplist.containsKey(blockID))
 			{
-				Material blockmaterial = event.getBlock().getType();
-				Drop drop = new Drop(1, blockmaterial);
-				Location dropLocation = event.getBlock().getLocation();
-				
-				drop.CreateDrop(dropLocation, dropLocation.getWorld());
+				AbstractDrop newDrop = droplist.get(blockID);				
+				Location dropLocation = event.getBlock().getLocation();				
+				newDrop.CreateDrop(dropLocation, dropLocation.getWorld());
 			}
 		}
 	}
@@ -46,5 +43,10 @@ public class GlassDropPluginListener extends BlockListener
 	public Boolean getDropGlass()
 	{
 		return this.dropglass;
+	}
+	
+	public void RefreshDroplist(HashMap<Integer, AbstractDrop> newDroplist)
+	{
+		this.droplist = newDroplist;
 	}
 }
