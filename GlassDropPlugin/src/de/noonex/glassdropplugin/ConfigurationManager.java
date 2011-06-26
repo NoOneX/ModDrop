@@ -22,7 +22,7 @@ public class ConfigurationManager
 	
 	public void setDropglass(boolean value)
 	{
-		this.config.setProperty("dropglass_on", true);
+		this.config.setProperty("dropglass_on", value);
 	}
 	
 	public void SaveConfiguration()
