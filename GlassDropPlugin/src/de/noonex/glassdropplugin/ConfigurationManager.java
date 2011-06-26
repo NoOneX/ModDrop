@@ -66,8 +66,30 @@ public class ConfigurationManager
 			}
 			
 			material = Material.getMaterial(dropID);
-			
-			newDrop = new NormalDrop(amount, material);
+			if(droplist.containsKey(blockID))
+			{
+				AbstractDrop previousSetting = droplist.get(blockID);
+				
+				if(previousSetting instanceof NormalDrop)
+				{
+					newDrop = new MultipleDrop(previousSetting, new NormalDrop(amount, material));
+				}
+				else if(previousSetting instanceof MultipleDrop)
+				{
+					MultipleDrop previousMultipleDrop = (MultipleDrop)previousSetting;
+					previousMultipleDrop.AddDrop(new NormalDrop(amount, material));
+					continue;
+				}
+				else
+				{
+					//TODO: Error notification
+					continue;
+				}
+			}
+			else
+			{
+				newDrop = new NormalDrop(amount, material);
+			}
 			droplist.put(blockID, newDrop);
 		}
 		
