@@ -1,5 +1,4 @@
 GlassDropPlugin
 ===============
 
-A bukkit (Minecraft Mod) plugin. This plugin puts glass
-into the player's inventory if he breaks glass-blocks.
+A bukkit (Minecraft Mod) plugin. This plugin drop items if a specified block is destroyed.
