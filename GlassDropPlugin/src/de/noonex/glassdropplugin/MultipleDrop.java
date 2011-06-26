@@ -13,15 +13,25 @@ public class MultipleDrop extends AbstractDrop {
 	
 	public MultipleDrop(AbstractDrop... drops)
 	{
-		droplist = new LinkedList<AbstractDrop>();
-		droplist.addAll(Arrays.asList(drops));
+		this.droplist = new LinkedList<AbstractDrop>();
+		this.droplist.addAll(Arrays.asList(drops));
 	}
 	
 	@Override
 	public void CreateDrop(Location loc, World world) {
-		for(AbstractDrop drop: droplist)
+		for(AbstractDrop drop: this.droplist)
 		{
 			drop.CreateDrop(loc, world);
 		}
+	}
+	
+	public void AddDrop(AbstractDrop drop)
+	{
+		this.droplist.add(drop);
+	}
+	
+	public void AddDrop(AbstractDrop... drops)
+	{
+		this.droplist.addAll(Arrays.asList(drops));
 	}
 }
