@@ -18,6 +18,11 @@ public class NormalDrop extends AbstractDrop
 	
 	public void CreateDrop(Location loc, World world)
 	{
+		if(amount <= 0)
+		{
+			return;
+		}
+		
 		ItemStack dropItems = new ItemStack(dropType, amount);
 		world.dropItemNaturally(loc, dropItems);
 	}
