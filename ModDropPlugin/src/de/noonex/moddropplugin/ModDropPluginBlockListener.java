@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.logging.Logger;
 
 import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.entity.Player;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockListener;
 
@@ -26,11 +28,15 @@ public class ModDropPluginBlockListener extends BlockListener
 		if(moddrop)
 		{
 			int blockID = event.getBlock().getTypeId();
-			if(droplist.containsKey(blockID))
+			if(droplist.containsKey(blockID) && !event.isCancelled())
 			{
 				AbstractDrop newDrop = droplist.get(blockID);				
 				Location dropLocation = event.getBlock().getLocation();				
 				newDrop.CreateDrop(dropLocation, dropLocation.getWorld());
+				
+				//Cancel the normal drop
+				event.setCancelled(true);
+				event.getBlock().setType(Material.AIR);
 			}
 		}
 	}
