@@ -89,13 +89,11 @@ public class ModDropPlugin extends JavaPlugin
 		configManager.setModDrop(moddrop);
 		
 		//TODO: Braucht ein einzelner Spieler diese Nachricht überhaupt?
-		message = String.format("%sGlassDrop ist nun %s%s%s.", ChatColor.GOLD, ChatColor.AQUA, state, ChatColor.GOLD);
+		message = String.format("%sModDrop ist nun %s%s%s.", ChatColor.GOLD, ChatColor.AQUA, state, ChatColor.GOLD);
 		player.sendMessage(message);
 		
-		servermessage = String.format("%sGlassDrop ist nun %s%s%s (geändert durch %s).", ChatColor.GOLD, ChatColor.AQUA, state, ChatColor.GOLD, playerName);
+		servermessage = String.format("%sModDrop ist nun %s%s%s (geändert durch %s).", ChatColor.GOLD, ChatColor.AQUA, state, ChatColor.GOLD, playerName);
 		getServer().broadcastMessage(servermessage);
-		
-		//player.sendMessage(ChatColor.GOLD + "GlassDrop ist nun " + ChatColor.AQUA + "aus" + ChatColor.GOLD + ".");
 		
 		return true;
 	}
