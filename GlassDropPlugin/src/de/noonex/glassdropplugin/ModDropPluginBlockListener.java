@@ -7,13 +7,13 @@ import org.bukkit.Location;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockListener;
 
-public class GlassDropPluginListener extends BlockListener
+public class ModDropPluginBlockListener extends BlockListener
 {
 	Logger serverLog;
 	Boolean dropglass;
 	HashMap<Integer, AbstractDrop> droplist;
 
-	public GlassDropPluginListener(Logger log, Boolean dropglass, HashMap<Integer, AbstractDrop> droplist)
+	public ModDropPluginBlockListener(Logger log, Boolean dropglass, HashMap<Integer, AbstractDrop> droplist)
 	{
 		this.serverLog = log;
 		this.dropglass = dropglass;

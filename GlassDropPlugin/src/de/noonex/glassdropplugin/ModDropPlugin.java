@@ -13,7 +13,7 @@ import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class GlassDropPlugin extends JavaPlugin
+public class ModDropPlugin extends JavaPlugin
 {
 	private Logger log = null;
 	private PluginManager pm;
@@ -22,7 +22,7 @@ public class GlassDropPlugin extends JavaPlugin
 	
 	Boolean dropglass;
 	
-	private GlassDropPluginListener stpBlockListener;
+	private ModDropPluginBlockListener stpBlockListener;
 
 	@Override
 	public void onDisable()
@@ -41,7 +41,7 @@ public class GlassDropPlugin extends JavaPlugin
 		
 		configManager = new ConfigurationManager(getConfiguration());
 		
-		stpBlockListener = new GlassDropPluginListener(log, dropglass, configManager.getDropList());
+		stpBlockListener = new ModDropPluginBlockListener(log, dropglass, configManager.getDropList());
 		dropglass = configManager.getDropglass();
 		stpBlockListener.setDropGlass(dropglass);
 		
