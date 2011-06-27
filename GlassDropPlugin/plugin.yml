@@ -1,6 +1,6 @@
 name: GlassDropPlugin
 main: de.noonex.glassdropplugin.GlassDropPlugin
-version: 0.1 early state
+version: 0.2
 
 commands:
     glassdrop:
