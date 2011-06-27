@@ -5,7 +5,7 @@ version: 0.2
 commands:
     moddrop:
         description: Enable or disable glass drops.
-        usage: /glassdrop
+        usage: /moddrop
     refreshmoddrop:
         description: Reload the config.yml file.
-        usage: /refreshglassdrop
+        usage: /refreshmoddrop
