@@ -1,4 +1,4 @@
-package de.noonex.glassdropplugin;
+package de.noonex.moddropplugin;
 
 import java.util.logging.Logger;
 

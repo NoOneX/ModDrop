@@ -1,5 +1,5 @@
 name: GlassDropPlugin
-main: de.noonex.glassdropplugin.GlassDropPlugin
+main: de.noonex.moddropplugin.ModDropPlugin
 version: 0.2
 
 commands:
