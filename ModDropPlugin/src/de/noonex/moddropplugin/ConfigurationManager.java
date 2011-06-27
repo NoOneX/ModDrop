@@ -15,14 +15,14 @@ public class ConfigurationManager
 		this.config.load();
 	}
 	
-	public boolean getDropglass()
+	public boolean getModDrop()
 	{
-		return this.config.getBoolean("dropglass_on", false);
+		return this.config.getBoolean("moddrop_on", false);
 	}
 	
-	public void setDropglass(boolean value)
+	public void setModDrop(boolean value)
 	{
-		this.config.setProperty("dropglass_on", value);
+		this.config.setProperty("moddrop_on", value);
 	}
 	
 	public void SaveConfiguration()

@@ -10,20 +10,20 @@ import org.bukkit.event.block.BlockListener;
 public class ModDropPluginBlockListener extends BlockListener
 {
 	Logger serverLog;
-	Boolean dropglass;
+	Boolean moddrop;
 	HashMap<Integer, AbstractDrop> droplist;
 
-	public ModDropPluginBlockListener(Logger log, Boolean dropglass, HashMap<Integer, AbstractDrop> droplist)
+	public ModDropPluginBlockListener(Logger log, Boolean moddrop, HashMap<Integer, AbstractDrop> droplist)
 	{
 		this.serverLog = log;
-		this.dropglass = dropglass;
+		this.moddrop = moddrop;
 		this.droplist = droplist;
 	}
 
 	@Override
 	public void onBlockBreak(BlockBreakEvent event)
 	{
-		if(dropglass)
+		if(moddrop)
 		{
 			int blockID = event.getBlock().getTypeId();
 			if(droplist.containsKey(blockID))
@@ -37,12 +37,12 @@ public class ModDropPluginBlockListener extends BlockListener
 	
 	public void setDropGlass(Boolean value)
 	{
-		this.dropglass = value;
+		this.moddrop = value;
 	}
 	
 	public Boolean getDropGlass()
 	{
-		return this.dropglass;
+		return this.moddrop;
 	}
 	
 	public void RefreshDroplist(HashMap<Integer, AbstractDrop> newDroplist)

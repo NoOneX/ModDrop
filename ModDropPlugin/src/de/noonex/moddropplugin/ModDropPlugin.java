@@ -20,7 +20,7 @@ public class ModDropPlugin extends JavaPlugin
 	ConfigurationManager configManager;
 	private Server server;
 	
-	Boolean dropglass;
+	Boolean moddrop;
 	
 	private ModDropPluginBlockListener stpBlockListener;
 
@@ -28,7 +28,7 @@ public class ModDropPlugin extends JavaPlugin
 	public void onDisable()
 	{
 		configManager.SaveConfiguration();
-		log.info("GlassDropPlugin disabled.");
+		log.info("ModDropPlugin disabled.");
 	}
 
 	@Override
@@ -36,25 +36,25 @@ public class ModDropPlugin extends JavaPlugin
 	{
 		PluginDescriptionFile description = getDescription();
 		log = getServer().getLogger();
-		dropglass = false;
+		moddrop = false;
 		server = getServer();
 		
 		configManager = new ConfigurationManager(getConfiguration());
 		
-		stpBlockListener = new ModDropPluginBlockListener(log, dropglass, configManager.getDropList());
-		dropglass = configManager.getDropglass();
-		stpBlockListener.setDropGlass(dropglass);
+		stpBlockListener = new ModDropPluginBlockListener(log, moddrop, configManager.getDropList());
+		moddrop = configManager.getModDrop();
+		stpBlockListener.setDropGlass(moddrop);
 		
 		pm = server.getPluginManager();
 		pm.registerEvent(Type.BLOCK_BREAK, stpBlockListener, Event.Priority.Lowest, this);
 		
-		log.info(String.format("GlassDropPlugin (v.%s) by NoOneX enabled.", description.getVersion()));
+		log.info(String.format("ModDropPlugin (v.%s) by NoOneX enabled.", description.getVersion()));
 	}
 	
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args)
 	{
-		if(!cmd.getName().equalsIgnoreCase("glassdrop") && !cmd.getName().equalsIgnoreCase("refreshglassdrop"))
+		if(!cmd.getName().equalsIgnoreCase("moddrop") && !cmd.getName().equalsIgnoreCase("refreshmoddrop"))
 		{
 			return false;
 		}
@@ -73,7 +73,7 @@ public class ModDropPlugin extends JavaPlugin
 		}
 		
 		//TODO: Provisorisch
-		if(cmd.getName().equalsIgnoreCase("refreshglassdrop"))
+		if(cmd.getName().equalsIgnoreCase("refreshmoddrop"))
 		{
 			this.configManager.LoadConfiguration();
 			stpBlockListener.RefreshDroplist(this.configManager.getDropList());
@@ -83,10 +83,10 @@ public class ModDropPlugin extends JavaPlugin
 		String playerName = player.getName();
 		String state, message, servermessage;
 		
-		dropglass = !dropglass;
-		state = dropglass ? "an" : "aus";
-		stpBlockListener.setDropGlass(dropglass);
-		configManager.setDropglass(dropglass);
+		moddrop = !moddrop;
+		state = moddrop ? "an" : "aus";
+		stpBlockListener.setDropGlass(moddrop);
+		configManager.setModDrop(moddrop);
 		
 		//TODO: Braucht ein einzelner Spieler diese Nachricht überhaupt?
 		message = String.format("%sGlassDrop ist nun %s%s%s.", ChatColor.GOLD, ChatColor.AQUA, state, ChatColor.GOLD);
