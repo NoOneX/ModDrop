@@ -1,6 +1,6 @@
 name: ModDropPlugin
 main: de.noonex.moddropplugin.ModDropPlugin
-version: 0.2
+version: 0.3
 
 commands:
     moddrop:

@@ -12,7 +12,7 @@ import com.iConomy.iConomy;
 //Singleton
 public final class PluginHookManager extends ServerListener
 {
-	//TODO: Use a hash map with JavaPlugins?
+	//TODO: Use a hash map with Plugins?
 	private iConomy iconomy = null;
 	private ModDropPlugin plugin = null;
 	private static PluginHookManager _instance = new PluginHookManager();

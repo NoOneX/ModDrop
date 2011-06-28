@@ -53,7 +53,8 @@ public class ConfigurationManager
 			}
 			catch(ParseException ex)
 			{
-				System.out.println("[ModDrop][DEBUG] " + ex.getMessage());
+				//TODO: Create better messages
+				System.out.println("[ModDrop][WARNING] " + ex.getMessage());
 				continue;
 			}
 			
