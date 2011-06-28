@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.bukkit.Location;
 import org.bukkit.World;
+import org.bukkit.entity.Player;
 
 public class MultipleDrop extends AbstractDrop {
 
@@ -18,10 +19,10 @@ public class MultipleDrop extends AbstractDrop {
 	}
 	
 	@Override
-	public void CreateDrop(Location loc, World world) {
+	public void CreateDrop(Location loc, World world, Player player) {
 		for(AbstractDrop drop: this.droplist)
 		{
-			drop.CreateDrop(loc, world);
+			drop.CreateDrop(loc, world, player);
 		}
 	}
 	

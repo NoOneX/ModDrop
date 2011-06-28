@@ -3,6 +3,7 @@ package de.noonex.moddropplugin;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 public class NormalDrop extends AbstractDrop
@@ -16,7 +17,7 @@ public class NormalDrop extends AbstractDrop
 		this.dropType = dropType;
 	}
 	
-	public void CreateDrop(Location loc, World world)
+	public void CreateDrop(Location loc, World world, Player player)
 	{
 		if(amount <= 0)
 		{

@@ -31,7 +31,7 @@ public class ModDropPluginBlockListener extends BlockListener
 			{
 				AbstractDrop newDrop = droplist.get(blockID);				
 				Location dropLocation = event.getBlock().getLocation();				
-				newDrop.CreateDrop(dropLocation, dropLocation.getWorld());
+				newDrop.CreateDrop(dropLocation, dropLocation.getWorld(), event.getPlayer());
 				
 				//Cancel the normal drop
 				event.setCancelled(true);
