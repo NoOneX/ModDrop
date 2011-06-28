@@ -40,6 +40,7 @@ public class ModDropPlugin extends JavaPlugin
 		server = getServer();
 		
 		configManager = new ConfigurationManager(getConfiguration());
+		PluginHookManager.getInstance().setPlugin(this);
 		
 		stpBlockListener = new ModDropPluginBlockListener(log, moddrop, configManager.getDropList());
 		moddrop = configManager.getModDrop();
@@ -47,6 +48,8 @@ public class ModDropPlugin extends JavaPlugin
 		
 		pm = server.getPluginManager();
 		pm.registerEvent(Type.BLOCK_BREAK, stpBlockListener, Event.Priority.Lowest, this);
+		pm.registerEvent(Type.PLUGIN_ENABLE, PluginHookManager.getInstance(), Event.Priority.Monitor, this);
+		pm.registerEvent(Type.PLUGIN_DISABLE, PluginHookManager.getInstance(), Event.Priority.Monitor, this);
 		
 		log.info(String.format("ModDropPlugin (v.%s) by NoOneX enabled.", description.getVersion()));
 	}
