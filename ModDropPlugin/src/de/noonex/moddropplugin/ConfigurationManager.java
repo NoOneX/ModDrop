@@ -1,5 +1,6 @@
 package de.noonex.moddropplugin;
 
+import java.text.ParseException;
 import java.util.HashMap;
 
 import org.bukkit.Material;
@@ -42,53 +43,40 @@ public class ConfigurationManager
 		
 		for(String configDropItem: configDroplist.split(" "))
 		{
-			String[] dropItem = configDropItem.split(":");
-			if(dropItem.length != 3)
-			{
-				continue;
-			}
-			
-			int amount;
-			int blockID;
-			int dropID;
-			Material material;
+			DropSetting drop;
 			AbstractDrop newDrop;
+			int blockID;
 			
 			try
 			{
-				amount = Integer.parseInt(dropItem[2]);
-				blockID = Integer.parseInt(dropItem[0]);
-				dropID = Integer.parseInt(dropItem[1]);
+				drop = DropStringParser.ParseDrop(configDropItem);
 			}
-			catch(NumberFormatException ex)
+			catch(ParseException ex)
 			{
+				System.out.println("[ModDrop][DEBUG] " + ex.getMessage());
 				continue;
 			}
 			
-			material = Material.getMaterial(dropID);
+			blockID = drop.getBlockId();
+			
 			if(droplist.containsKey(blockID))
 			{
 				AbstractDrop previousSetting = droplist.get(blockID);
 				
-				if(previousSetting instanceof NormalDrop)
-				{
-					newDrop = new MultipleDrop(previousSetting, new NormalDrop(amount, material));
-				}
-				else if(previousSetting instanceof MultipleDrop)
+				if(previousSetting instanceof MultipleDrop)
 				{
 					MultipleDrop previousMultipleDrop = (MultipleDrop)previousSetting;
-					previousMultipleDrop.AddDrop(new NormalDrop(amount, material));
+					previousMultipleDrop.AddDrop(drop.getDrop());
 					continue;
 				}
 				else
 				{
-					//TODO: Error notification
-					continue;
+					newDrop = new MultipleDrop(previousSetting, drop.getDrop());
 				}
 			}
 			else
 			{
-				newDrop = new NormalDrop(amount, material);
+				newDrop = drop.getDrop();
 			}
 			droplist.put(blockID, newDrop);
 		}
