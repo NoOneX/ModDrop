@@ -8,23 +8,25 @@ import org.bukkit.inventory.ItemStack;
 
 public class NormalDrop extends AbstractDrop
 {
-	private int amount;
 	private Material dropType;
-	
-	public NormalDrop(int amount, Material dropType)
+
+	public NormalDrop(Material dropType)
 	{
-		this.amount = amount;
+		this.amount = new NormalAmount(0, 0);
 		this.dropType = dropType;
 	}
-	
-	public void CreateDrop(Location loc, World world, Player player)
+
+	public void CreateDrop(final Location loc, final World world, Player player)
 	{
-		if(amount <= 0)
+		this.amount.Do(new IAmountable()
 		{
-			return;
-		}
-		
-		ItemStack dropItems = new ItemStack(dropType, amount);
-		world.dropItemNaturally(loc, dropItems);
+			@Override
+			public void Do(Object param)
+			{
+				ItemStack dropItems = new ItemStack(dropType, 1);
+				world.dropItemNaturally(loc, dropItems);
+			}
+		});
+
 	}
 }
