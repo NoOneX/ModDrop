@@ -3,7 +3,6 @@ package de.noonex.moddropplugin;
 import java.text.ParseException;
 import java.util.HashMap;
 
-import org.bukkit.Material;
 import org.bukkit.util.config.Configuration;
 
 public class ConfigurationManager

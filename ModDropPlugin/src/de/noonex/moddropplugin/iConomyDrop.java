@@ -18,6 +18,7 @@ public class iConomyDrop extends AbstractDrop {
 		this.moneyamount = moneyamount;
 	}
 
+	@SuppressWarnings("static-access")
 	@Override
 	public void CreateDrop(Location loc, World world, Player player)
 	{
