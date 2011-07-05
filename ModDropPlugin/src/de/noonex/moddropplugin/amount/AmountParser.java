@@ -34,7 +34,7 @@ public final class AmountParser
 	private static Amount parseMultipleAmount(String amountstr)
 			throws ParseException
 	{
-		String[] multipleAmountString = amountstr.split("-");
+		String[] multipleAmountString = amountstr.split(",");
 		int[] amounts = new int[multipleAmountString.length];
 		
 		for(int i = 0; i < amounts.length; i++)

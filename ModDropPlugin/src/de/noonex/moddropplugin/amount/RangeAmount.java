@@ -20,7 +20,7 @@ public class RangeAmount extends Amount
 	@Override
 	public void Do(IAmountable amountable)
 	{
-		int amount = this.rnd.nextInt(differenceminmax) + this.min;
+		int amount = this.rnd.nextInt(differenceminmax + 1) + this.min;
 		for(int i = 0; i < amount; i++)
 		{
 			amountable.Do(amount);
