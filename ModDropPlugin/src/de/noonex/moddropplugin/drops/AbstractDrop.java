@@ -1,4 +1,4 @@
-package de.noonex.moddropplugin;
+package de.noonex.moddropplugin.drops;
 
 import java.util.List;
 
@@ -7,6 +7,7 @@ import org.bukkit.World;
 import org.bukkit.entity.Player;
 
 import de.noonex.moddropplugin.amount.Amount;
+import de.noonex.moddropplugin.conditions.Condition;
 
 
 public abstract class AbstractDrop 

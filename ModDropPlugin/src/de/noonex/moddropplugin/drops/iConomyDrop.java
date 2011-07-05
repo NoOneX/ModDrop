@@ -1,4 +1,4 @@
-package de.noonex.moddropplugin;
+package de.noonex.moddropplugin.drops;
 
 import javax.naming.OperationNotSupportedException;
 
@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 import com.iConomy.iConomy;
 import com.iConomy.system.Holdings;
 
+import de.noonex.moddropplugin.PluginHookManager;
 import de.noonex.moddropplugin.amount.IAmountable;
 
 public class iConomyDrop extends AbstractDrop {

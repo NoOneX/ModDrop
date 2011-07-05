@@ -1,5 +1,5 @@
 package de.noonex.moddropplugin.configuration;
-import de.noonex.moddropplugin.AbstractDrop;
+import de.noonex.moddropplugin.drops.AbstractDrop;
 
 public abstract class AbstractNode
 {

@@ -1,4 +1,4 @@
-package de.noonex.moddropplugin;
+package de.noonex.moddropplugin.drops;
 
 import java.text.ParseException;
 

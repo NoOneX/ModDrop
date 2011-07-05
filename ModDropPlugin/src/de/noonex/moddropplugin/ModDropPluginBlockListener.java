@@ -8,6 +8,8 @@ import org.bukkit.Material;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockListener;
 
+import de.noonex.moddropplugin.drops.AbstractDrop;
+
 public class ModDropPluginBlockListener extends BlockListener
 {
 	Logger serverLog;

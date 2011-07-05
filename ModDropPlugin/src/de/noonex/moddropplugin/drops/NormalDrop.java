@@ -1,4 +1,4 @@
-package de.noonex.moddropplugin;
+package de.noonex.moddropplugin.drops;
 
 import org.bukkit.Location;
 import org.bukkit.Material;

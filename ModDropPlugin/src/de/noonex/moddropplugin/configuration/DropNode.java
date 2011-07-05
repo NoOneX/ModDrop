@@ -2,8 +2,8 @@ package de.noonex.moddropplugin.configuration;
 
 import org.bukkit.Material;
 
-import de.noonex.moddropplugin.AbstractDrop;
-import de.noonex.moddropplugin.NormalDrop;
+import de.noonex.moddropplugin.drops.AbstractDrop;
+import de.noonex.moddropplugin.drops.NormalDrop;
 
 public class DropNode extends AbstractNode
 {

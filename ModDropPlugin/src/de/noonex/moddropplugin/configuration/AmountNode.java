@@ -2,7 +2,7 @@ package de.noonex.moddropplugin.configuration;
 
 import java.util.regex.Pattern;
 
-import de.noonex.moddropplugin.AbstractDrop;
+import de.noonex.moddropplugin.drops.AbstractDrop;
 
 public class AmountNode extends AbstractNode
 {

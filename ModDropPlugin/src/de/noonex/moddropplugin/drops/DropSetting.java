@@ -1,4 +1,4 @@
-package de.noonex.moddropplugin;
+package de.noonex.moddropplugin.drops;
 
 public class DropSetting 
 {

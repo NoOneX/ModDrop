@@ -5,6 +5,11 @@ import java.util.HashMap;
 
 import org.bukkit.util.config.Configuration;
 
+import de.noonex.moddropplugin.drops.AbstractDrop;
+import de.noonex.moddropplugin.drops.DropSetting;
+import de.noonex.moddropplugin.drops.DropStringParser;
+import de.noonex.moddropplugin.drops.MultipleDrop;
+
 public class ConfigurationManager
 {
 	private Configuration config;

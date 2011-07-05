@@ -1,7 +1,7 @@
 package de.noonex.moddropplugin.configuration;
 
-import de.noonex.moddropplugin.AbstractDrop;
-import de.noonex.moddropplugin.WorldCondition;
+import de.noonex.moddropplugin.conditions.WorldCondition;
+import de.noonex.moddropplugin.drops.AbstractDrop;
 
 public class WorldNode extends AbstractNode
 {
