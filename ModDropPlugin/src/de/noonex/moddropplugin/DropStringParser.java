@@ -5,6 +5,10 @@ import java.text.ParseException;
 import org.bukkit.Material;
 import org.bukkit.entity.CreatureType;
 
+import de.noonex.moddropplugin.amount.Amount;
+import de.noonex.moddropplugin.amount.AmountParser;
+import de.noonex.moddropplugin.amount.iConomyAmount;
+
 //TODO: Parser as a plugin
 public class DropStringParser
 {
@@ -37,15 +41,14 @@ public class DropStringParser
 	private static DropSetting parseiConomyDrop(String[] arguments)
 			throws ParseException
 	{
-		AbstractDrop newDrop;
-		
-		double amount;
+		AbstractDrop newDrop;		
+		Amount amount;
 		int blockID;
 		
 		try
 		{				
 			blockID = Integer.parseInt(arguments[1]);
-			amount = Double.parseDouble(arguments[3]);
+			amount = new iConomyAmount(Double.parseDouble(arguments[3]));
 		}
 		catch(NumberFormatException ex)
 		{
@@ -53,7 +56,8 @@ public class DropStringParser
 			throw new ParseException("Bad format: BlockID or the amount are not numbers.", 0);
 		}
 		
-		newDrop = new iConomyDrop(amount);
+		newDrop = new iConomyDrop();
+		newDrop.setAmount(amount);
 		
 		return new DropSetting(newDrop, blockID);
 	}
@@ -63,7 +67,7 @@ public class DropStringParser
 	{
 		AbstractDrop newDrop;
 		
-		int amount;
+		Amount amount;
 		int blockID;
 		CreatureType creature;
 		
@@ -71,7 +75,6 @@ public class DropStringParser
 		{				
 			blockID = Integer.parseInt(arguments[1]);
 			creature = CreatureType.fromName(arguments[2]);
-			amount = Integer.parseInt(arguments[3]);
 		}
 		catch(NumberFormatException ex)
 		{
@@ -79,7 +82,11 @@ public class DropStringParser
 			throw new ParseException("Bad format: BlockID or the amount are not numbers. Or the creature name is wrong.", 0);
 		}
 		
-		newDrop = new MonsterDrop(creature, amount);
+		amount = AmountParser.ParseAmount(arguments[3]);
+		
+		newDrop = new MonsterDrop(creature);
+		newDrop.setAmount(amount);
+		
 		return new DropSetting(newDrop, blockID);
 	}
 
@@ -88,7 +95,7 @@ public class DropStringParser
 	{
 		AbstractDrop newDrop;
 		
-		int amount;
+		Amount amount;
 		int dropID;
 		int blockID;
 		Material material;
@@ -97,7 +104,6 @@ public class DropStringParser
 		{				
 			blockID = Integer.parseInt(arguments[1]);
 			dropID = Integer.parseInt(arguments[2]);
-			amount = Integer.parseInt(arguments[3]);
 		}
 		catch(NumberFormatException ex)
 		{
@@ -105,8 +111,11 @@ public class DropStringParser
 			throw new ParseException("Bad format: BlockID, DropID or the amount are not numbers.", 0);
 		}
 		
+		amount = AmountParser.ParseAmount(arguments[3]);
+		
 		material = Material.getMaterial(dropID);
 		newDrop = new NormalDrop(material);
+		newDrop.setAmount(amount);
 		
 		return new DropSetting(newDrop, blockID);
 	}
