@@ -6,6 +6,8 @@ import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 
+import amount.Amount;
+
 public abstract class AbstractDrop 
 {
 	protected Amount amount;

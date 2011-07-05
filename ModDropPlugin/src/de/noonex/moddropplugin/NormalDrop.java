@@ -6,6 +6,9 @@ import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
+import amount.IAmountable;
+import amount.NormalAmount;
+
 public class NormalDrop extends AbstractDrop
 {
 	private Material dropType;
