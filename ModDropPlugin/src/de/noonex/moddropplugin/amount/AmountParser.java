@@ -1,4 +1,4 @@
-package amount;
+package de.noonex.moddropplugin.amount;
 
 import java.text.ParseException;
 

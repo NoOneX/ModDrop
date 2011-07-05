@@ -6,7 +6,8 @@ import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 
-import amount.Amount;
+import de.noonex.moddropplugin.amount.Amount;
+
 
 public abstract class AbstractDrop 
 {
