@@ -8,6 +8,9 @@ import org.bukkit.entity.CreatureType;
 import de.noonex.moddropplugin.amount.Amount;
 import de.noonex.moddropplugin.amount.AmountParser;
 import de.noonex.moddropplugin.amount.iConomyAmount;
+import de.noonex.moddropplugin.conditions.Condition;
+import de.noonex.moddropplugin.conditions.ConditionParser;
+import de.noonex.moddropplugin.conditions.NullCondition;
 
 //TODO: Parser as a plugin
 public class DropStringParser
@@ -15,8 +18,38 @@ public class DropStringParser
 	public static DropSetting ParseDrop(String str) throws ParseException
 	{
 		DropSetting newDrop;
+		String[] arguments;
 		
-		String[] arguments = str.split(":");
+		Condition[] conditions = new Condition[1];
+		conditions[0] = new NullCondition();
+		
+		if(str.contains("@"))
+		{
+			String[] configurationString = str.split("@");
+			if(configurationString.length != 2)
+			{
+				throw new ParseException(
+						"Bad format. Use this format: droptype:blockId:additionalarguments:amount@conditions",
+						0);
+			}
+			
+			try
+			{
+				conditions = ConditionParser.ParseConditions(configurationString[1]);
+			}
+			catch(ParseException ex)
+			{
+				//print warning, ignore conditions
+				System.out.println("[ModDrop][WARNING] Bad conditions.");
+			}
+			
+			arguments = configurationString[0].split(":");
+		}
+		else
+		{
+			arguments = str.split(":");
+		}		
+		
 		if (arguments.length != 4)
 		{
 			throw new ParseException(
@@ -45,6 +78,8 @@ public class DropStringParser
 			throw new ParseException("This keyword is not supported: "
 					+ arguments[0], 0);
 		}
+		
+		newDrop.getDrop().AddCondition(conditions);
 		
 		return newDrop;
 	}

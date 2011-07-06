@@ -15,6 +15,6 @@ public class WorldCondition extends Condition
 	@Override
 	public boolean CheckCondition(Player player, Location loc)
 	{
-		return loc.getWorld().getName() == this.worldName;
+		return loc.getWorld().getName().equals(this.worldName);
 	}
 }

@@ -36,6 +36,7 @@ public class ModDropPluginBlockListener extends BlockListener
 				newDrop.CreateDrop(dropLocation, dropLocation.getWorld(), event.getPlayer(), true);
 				
 				//Cancel the normal drop
+				//ISSUE: You have to specify the normal drop if using world-condition
 				event.setCancelled(true);
 				event.getBlock().setType(Material.AIR);
 			}

@@ -1,5 +1,6 @@
 package de.noonex.moddropplugin.drops;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -35,9 +36,9 @@ public abstract class AbstractDrop
 		return true;
 	}
 	
-	public void AddCondition(Condition cond)
+	public void AddCondition(Condition... conditions)
 	{
-		this.conditions.add(cond);
+		this.conditions.addAll(Arrays.asList(conditions));
 	}
 	
 	public Amount getAmount()
