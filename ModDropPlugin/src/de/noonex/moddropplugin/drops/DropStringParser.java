@@ -34,9 +34,9 @@ public class DropStringParser
 		{
 			return parseiConomyDrop(arguments);
 		}
-		else if (arguments[0].equalsIgnoreCase("primedtnt"))
+		else if (arguments[0].equalsIgnoreCase("explosion"))
 		{
-			return parsePrimedTNTDrop(arguments);
+			return parseExplosionDrop(arguments);
 		}
 		else
 		{
@@ -45,25 +45,27 @@ public class DropStringParser
 		}
 	}
 
-	private static DropSetting parsePrimedTNTDrop(String[] arguments)
+	private static DropSetting parseExplosionDrop(String[] arguments)
 			throws ParseException
 	{
 		AbstractDrop newDrop;
 		Amount amount;
 		int blockID;
+		float strength;
 
 		try
 		{
 			blockID = Integer.parseInt(arguments[1]);
+			strength = Float.parseFloat(arguments[2]);
 		}
 		catch (NumberFormatException ex)
 		{
 			throw new ParseException(
-					"Bad format: BlockID or the amount are not numbers.", 0);
+					"Bad format: BlockID or the strength are not numbers.", 0);
 		}
 		
 		amount = AmountParser.ParseAmount(arguments[3]);
-		newDrop = new PrimedTNTDrop();
+		newDrop = new ExplosionDrop(strength);
 		newDrop.setAmount(amount);
 		
 		return new DropSetting(newDrop, blockID);
