@@ -16,8 +16,17 @@ public class ExplosionDrop extends AbstractDrop
 	}
 
 	@Override
-	public void CreateDrop(final Location loc, final World world, final Player player)
+	public void CreateDrop(final Location loc, final World world, final Player player, boolean checkConditions)
 	{
+		if(checkConditions)
+		{
+			if(!this.CheckConditions(player, loc))
+			{
+				//cancel the drop
+				return;
+			}
+		}
+		
 		this.amount.Do(new IAmountable()
 		{			
 			@Override

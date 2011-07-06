@@ -19,8 +19,17 @@ public class iConomyDrop extends AbstractDrop {
 
 	@SuppressWarnings("static-access")
 	@Override
-	public void CreateDrop(final Location loc, final World world, final Player player)
+	public void CreateDrop(final Location loc, final World world, final Player player, boolean checkConditions)
 	{
+		if(checkConditions)
+		{
+			if(!this.CheckConditions(player, loc))
+			{
+				//cancel the drop
+				return;
+			}
+		}
+		
 		final PluginHookManager pluginhook = PluginHookManager.getInstance();
 		
 		if(pluginhook.IsiConomyAvailable())

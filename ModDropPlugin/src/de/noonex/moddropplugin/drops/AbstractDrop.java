@@ -1,5 +1,6 @@
 package de.noonex.moddropplugin.drops;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import org.bukkit.Location;
@@ -17,9 +18,10 @@ public abstract class AbstractDrop
 	
 	public AbstractDrop()
 	{
+		conditions = new LinkedList<Condition>();
 	}
 	
-	public abstract void CreateDrop(Location loc, World world, Player player);
+	public abstract void CreateDrop(Location loc, World world, Player player, boolean checkConditions);
 	public boolean CheckConditions(Player player, Location loc) //Location for further purposes (region spawning?)
 	{
 		for(Condition c: this.conditions)

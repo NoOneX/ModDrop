@@ -19,10 +19,18 @@ public class MultipleDrop extends AbstractDrop {
 	}
 	
 	@Override
-	public void CreateDrop(Location loc, World world, Player player) {
+	public void CreateDrop(Location loc, World world, Player player, boolean checkConditions) {
 		for(AbstractDrop drop: this.droplist)
 		{
-			drop.CreateDrop(loc, world, player);
+			if(checkConditions)
+			{
+				if(!drop.CheckConditions(player, loc))
+				{
+					//cancel the drop
+					continue;
+				}
+			}
+			drop.CreateDrop(loc, world, player, false);
 		}
 	}
 	

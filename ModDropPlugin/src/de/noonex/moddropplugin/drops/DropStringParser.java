@@ -14,6 +14,8 @@ public class DropStringParser
 {
 	public static DropSetting ParseDrop(String str) throws ParseException
 	{
+		DropSetting newDrop;
+		
 		String[] arguments = str.split(":");
 		if (arguments.length != 4)
 		{
@@ -24,25 +26,27 @@ public class DropStringParser
 
 		if (arguments[0].equalsIgnoreCase("block"))
 		{
-			return parseBlockDrop(arguments);
+			newDrop = parseBlockDrop(arguments);
 		}
 		else if (arguments[0].equalsIgnoreCase("monster"))
 		{
-			return parseMonsterDrop(arguments);
+			newDrop = parseMonsterDrop(arguments);
 		}
 		else if (arguments[0].equalsIgnoreCase("icon"))
 		{
-			return parseiConomyDrop(arguments);
+			newDrop = parseiConomyDrop(arguments);
 		}
 		else if (arguments[0].equalsIgnoreCase("explosion"))
 		{
-			return parseExplosionDrop(arguments);
+			newDrop = parseExplosionDrop(arguments);
 		}
 		else
 		{
 			throw new ParseException("This keyword is not supported: "
 					+ arguments[0], 0);
 		}
+		
+		return newDrop;
 	}
 
 	private static DropSetting parseExplosionDrop(String[] arguments)
