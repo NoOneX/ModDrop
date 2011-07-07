@@ -73,6 +73,10 @@ public class DropStringParser
 		{
 			newDrop = parseExplosionDrop(arguments);
 		}
+		else if (arguments[0].equalsIgnoreCase("lightning"))
+		{
+			newDrop = parseLightningDrop(arguments);
+		}
 		else
 		{
 			throw new ParseException("This keyword is not supported: "
@@ -82,6 +86,31 @@ public class DropStringParser
 		newDrop.getDrop().AddCondition(conditions);
 		
 		return newDrop;
+	}
+
+	private static DropSetting parseLightningDrop(String[] arguments) throws ParseException
+	{
+		AbstractDrop newDrop;
+		Amount amount;
+		int blockID;
+		int damage;
+
+		try
+		{
+			blockID = Integer.parseInt(arguments[1]);
+			damage = Integer.parseInt(arguments[2]);
+		}
+		catch (NumberFormatException ex)
+		{
+			throw new ParseException(
+					"Bad format: BlockID or the damage are not numbers.", 0);
+		}
+		
+		amount = AmountParser.ParseAmount(arguments[3]);
+		newDrop = new LightningDrop(damage);
+		newDrop.setAmount(amount);
+		
+		return new DropSetting(newDrop, blockID);
 	}
 
 	private static DropSetting parseExplosionDrop(String[] arguments)
