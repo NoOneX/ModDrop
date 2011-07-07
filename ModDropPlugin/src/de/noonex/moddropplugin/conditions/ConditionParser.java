@@ -18,6 +18,20 @@ public final class ConditionParser
 			if(keyvalueArr[0].equalsIgnoreCase("world"))
 			{
 				conditions.add(ParseWorldCondition(keyvalueArr[1]));
+				System.out.println("world condition added: " + keyvalue);
+			}
+			else if(keyvalueArr[0].equalsIgnoreCase("damage"))
+			{
+				try
+				{
+					conditions.add(ParseDamageCondition(keyvalueArr[1]));
+					System.out.println("damage condition added: " + keyvalue);
+				}
+				catch(ParseException ex)
+				{
+					System.out.println("[ModDrop][WARNING] The damage condition value is not a number." + keyvalue);
+					continue;
+				}
 			}
 			else
 			{
@@ -31,6 +45,22 @@ public final class ConditionParser
 		}
 		
 		return conditions.toArray(new Condition[conditions.size()]);
+	}
+
+	private static Condition ParseDamageCondition(String value) throws ParseException
+	{
+		byte damagevalue;
+		
+		try
+		{
+			damagevalue = Byte.parseByte(value);
+		}
+		catch(NumberFormatException ex)
+		{
+			throw new ParseException("The damage condition value is not valid", 0);
+		}
+		
+		return new DamageValueCondition(damagevalue);
 	}
 
 	private static Condition ParseWorldCondition(String value)
