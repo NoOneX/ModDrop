@@ -202,7 +202,39 @@ public class DropStringParser
 		Amount amount;
 		int dropID;
 		int blockID;
+		byte damageData = 0;
 		Material material;
+		
+		if(arguments[2].contains("("))
+		{
+			String[] damagedDropStringArr = arguments[2].split("\\(");
+			
+			if(damagedDropStringArr.length != 2)
+			{
+				throw new ParseException(
+						"Bad format: DropID usage: DropBlockId(Damagevalue).",
+						0);
+			}
+			
+			//remove damage argument and the second parenthesis
+			arguments[2] = damagedDropStringArr[0];
+			damagedDropStringArr[1] = damagedDropStringArr[1].substring(0, damagedDropStringArr[1].length() - 1);
+			
+			try
+			{
+				damageData = Byte.parseByte(damagedDropStringArr[1]);
+			}
+			catch(NumberFormatException ex)
+			{
+				throw new ParseException(
+						"Bad format: Damage-value is not a number or is too big: " + damagedDropStringArr[1],
+						0);
+			}
+			
+			//DEBUG
+			System.out.println("[ModDrop][INFO]Damage parsed: " + damageData);
+			//DEBUG END
+		}
 
 		try
 		{
@@ -220,7 +252,7 @@ public class DropStringParser
 		amount = AmountParser.ParseAmount(arguments[3]);
 
 		material = Material.getMaterial(dropID);
-		newDrop = new NormalDrop(material);
+		newDrop = new NormalDrop(material, damageData);
 		newDrop.setAmount(amount);
 
 		return new DropSetting(newDrop, blockID);

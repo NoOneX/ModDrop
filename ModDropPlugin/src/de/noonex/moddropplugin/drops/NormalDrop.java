@@ -13,11 +13,13 @@ import de.noonex.moddropplugin.amount.NormalAmount;
 public class NormalDrop extends AbstractDrop
 {
 	private Material dropType;
+	private byte damageData;
 
-	public NormalDrop(Material dropType)
+	public NormalDrop(Material dropType, byte damageData)
 	{
 		this.amount = new NormalAmount(0, 0);
 		this.dropType = dropType;
+		this.damageData = damageData;
 	}
 
 	public void CreateDrop(final Location loc, final World world, Player player, boolean checkConditions)
@@ -36,8 +38,12 @@ public class NormalDrop extends AbstractDrop
 			@Override
 			public void Do(Object param)
 			{
-				ItemStack dropItems = new ItemStack(dropType, 1);
+				ItemStack dropItems = new ItemStack(dropType, 1, damageData, damageData);
 				world.dropItemNaturally(loc, dropItems);
+				
+				//DEBUG
+				System.out.println("[ModDrop][INFO]Item dropped: " + dropType.toString() + ":" + damageData);
+				//DEBUG END
 			}
 		});
 
