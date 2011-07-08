@@ -1,4 +1,4 @@
-GlassDropPlugin
+ModDrop v0.5
 ===============
 
-A bukkit (Minecraft Mod) plugin. This plugin drop items if a specified block is destroyed.
+A bukkit / craftbukkit (Minecraft Mod) plugin. You can create custom drops, e.g. glass drops glass blocks or cobblestone drops gravel. It's possible to spawn monsters or give the player money (iConomy). Or scare the player with a lightning strike, if he mines diamond.
