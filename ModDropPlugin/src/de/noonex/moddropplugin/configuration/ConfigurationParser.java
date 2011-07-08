@@ -34,7 +34,7 @@ public class ConfigurationParser
 	
 	public AbstractDrop ParseString(String sentence)
 	{
-		AbstractDrop newDrop = new NormalDrop(Material.STONE);
+		AbstractDrop newDrop = new NormalDrop(Material.STONE, (byte)0);
 		String[] words = sentence.split(" ");
 		
 		for(int i = 0; i < words.length; i++)

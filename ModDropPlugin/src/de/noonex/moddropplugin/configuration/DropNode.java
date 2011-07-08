@@ -39,7 +39,7 @@ public class DropNode extends AbstractNode
 			material = Material.getMaterial(parameter);
 		}
 		
-		previousResult = new NormalDrop(material);
+		previousResult = new NormalDrop(material, (byte)0);
 	}
 
 }
