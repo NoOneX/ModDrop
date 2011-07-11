@@ -71,7 +71,7 @@ public class ModDropPlugin extends JavaPlugin
 		
 		if(!player.isOp())
 		{
-			player.sendMessage(ChatColor.RED + "Sie haben nicht genügend Rechte diesen Befehl zu nutzen.");
+			player.sendMessage(ChatColor.RED + "You have not the necessary rights to use this command.");
 			return true;
 		}
 		
@@ -84,18 +84,14 @@ public class ModDropPlugin extends JavaPlugin
 		}
 		
 		String playerName = player.getName();
-		String state, message, servermessage;
+		String state, servermessage;
 		
 		moddrop = !moddrop;
-		state = moddrop ? "an" : "aus";
+		state = moddrop ? "enabled" : "disabled";
 		stpBlockListener.setDropGlass(moddrop);
 		configManager.setModDrop(moddrop);
 		
-		//TODO: Braucht ein einzelner Spieler diese Nachricht überhaupt?
-		message = String.format("%sModDrop ist nun %s%s%s.", ChatColor.GOLD, ChatColor.AQUA, state, ChatColor.GOLD);
-		player.sendMessage(message);
-		
-		servermessage = String.format("%sModDrop ist nun %s%s%s (geändert durch %s).", ChatColor.GOLD, ChatColor.AQUA, state, ChatColor.GOLD, playerName);
+		servermessage = String.format("%sModDrop is %s%s%s (changed by %s).", ChatColor.GOLD, ChatColor.AQUA, state, ChatColor.GOLD, playerName);
 		getServer().broadcastMessage(servermessage);
 		
 		return true;
