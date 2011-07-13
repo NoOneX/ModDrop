@@ -17,4 +17,10 @@ public class WorldCondition extends Condition
 	{
 		return loc.getWorld().getName().equals(this.worldName);
 	}
+
+	@Override
+	public String ToString()
+	{
+		return this.worldName;
+	}
 }

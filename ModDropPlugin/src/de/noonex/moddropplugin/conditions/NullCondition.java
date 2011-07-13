@@ -12,4 +12,11 @@ public class NullCondition extends Condition
 		return true;
 	}
 
+	@Override
+	public String ToString()
+	{
+		// TODO Auto-generated method stub
+		return "null";
+	}
+
 }

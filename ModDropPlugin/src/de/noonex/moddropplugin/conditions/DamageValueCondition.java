@@ -18,4 +18,10 @@ public class DamageValueCondition extends Condition
 		return loc.getBlock().getData() == this.damagevalue;
 	}
 
+	@Override
+	public String ToString()
+	{
+		return String.valueOf(this.damagevalue);
+	}
+
 }
