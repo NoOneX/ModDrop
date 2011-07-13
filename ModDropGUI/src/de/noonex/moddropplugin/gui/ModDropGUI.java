@@ -21,11 +21,14 @@ public class ModDropGUI extends JFrame
 {
 
 	private static final long serialVersionUID = 1L;
-	private JButton jButton0;
+	private JButton btnSaveDroplist;
 	private JList jList0;
 	private JScrollPane jScrollPane0;
-	private JButton jButton1;
-	private JLabel jLabel0;
+	private JButton btnLoadDroplist;
+	private JLabel lblInfoDropSelect;
+	private JButton btnAddDrop;
+	private JButton btnDeleteDrop;
+	private JButton btnChangeDrop;
 
 	public ModDropGUI()
 	{
@@ -38,27 +41,54 @@ public class ModDropGUI extends JFrame
 		setFont(new Font("Dialog", Font.PLAIN, 12));
 		setForeground(Color.black);
 		setLayout(new GroupLayout());
-		add(getJButton0(), new Constraints(new Trailing(12, 12, 12), new Leading(12, 12, 12)));
-		add(getJButton1(), new Constraints(new Trailing(86, 12, 12), new Leading(12, 12, 12)));
-		add(getJLabel0(), new Constraints(new Bilateral(11, 169, 181), new Leading(12, 26, 12, 12)));
-		add(getJScrollPane0(), new Constraints(new Bilateral(11, 12, 22), new Bilateral(50, 12, 22)));
-		setSize(453, 210);
+		add(getBtnSaveDroplist(), new Constraints(new Trailing(12, 12, 12), new Leading(12, 12, 12)));
+		add(getLblInfoDropSelect(), new Constraints(new Bilateral(11, 169, 181), new Leading(12, 26, 12, 12)));
+		add(getBtnAddDrop(), new Constraints(new Leading(12, 12, 12), new Trailing(12, 84, 140)));
+		add(getJScrollPane0(), new Constraints(new Bilateral(11, 12, 22), new Bilateral(50, 50, 22)));
+		add(getBtnDeleteDrop(), new Constraints(new Leading(115, 12, 12), new Trailing(12, 78, 203)));
+		add(getBtnChangeDrop(), new Constraints(new Leading(232, 12, 12), new Trailing(12, 78, 203)));
+		add(getBtnLoadDroplist(), new Constraints(new Trailing(92, 362, 362), new Leading(12, 78, 203)));
+		setSize(529, 190);
 	}
 
-	private JLabel getJLabel0() {
-		if (jLabel0 == null) {
-			jLabel0 = new JLabel();
-			jLabel0.setText("Select the drop you want to edit:");
+	private JButton getBtnChangeDrop() {
+		if (btnChangeDrop == null) {
+			btnChangeDrop = new JButton();
+			btnChangeDrop.setText("Change drop");
 		}
-		return jLabel0;
+		return btnChangeDrop;
 	}
 
-	private JButton getJButton1() {
-		if (jButton1 == null) {
-			jButton1 = new JButton();
-			jButton1.setText("Load...");
+	private JButton getBtnDeleteDrop() {
+		if (btnDeleteDrop == null) {
+			btnDeleteDrop = new JButton();
+			btnDeleteDrop.setText("Delete drop");
 		}
-		return jButton1;
+		return btnDeleteDrop;
+	}
+
+	private JButton getBtnAddDrop() {
+		if (btnAddDrop == null) {
+			btnAddDrop = new JButton();
+			btnAddDrop.setText("Add drop");
+		}
+		return btnAddDrop;
+	}
+
+	private JLabel getLblInfoDropSelect() {
+		if (lblInfoDropSelect == null) {
+			lblInfoDropSelect = new JLabel();
+			lblInfoDropSelect.setText("Select the drop you want to edit:");
+		}
+		return lblInfoDropSelect;
+	}
+
+	private JButton getBtnLoadDroplist() {
+		if (btnLoadDroplist == null) {
+			btnLoadDroplist = new JButton();
+			btnLoadDroplist.setText("Load...");
+		}
+		return btnLoadDroplist;
 	}
 
 	private JScrollPane getJScrollPane0() {
@@ -82,12 +112,12 @@ public class ModDropGUI extends JFrame
 		return jList0;
 	}
 
-	private JButton getJButton0() {
-		if (jButton0 == null) {
-			jButton0 = new JButton();
-			jButton0.setText("Save");
+	private JButton getBtnSaveDroplist() {
+		if (btnSaveDroplist == null) {
+			btnSaveDroplist = new JButton();
+			btnSaveDroplist.setText("Save");
 		}
-		return jButton0;
+		return btnSaveDroplist;
 	}
 
 }
