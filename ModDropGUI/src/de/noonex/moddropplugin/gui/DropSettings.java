@@ -6,6 +6,8 @@ import java.awt.Font;
 import java.awt.Frame;
 import java.awt.GraphicsConfiguration;
 import java.awt.Window;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
@@ -22,6 +24,8 @@ import org.dyno.visual.swing.layouts.Constraints;
 import org.dyno.visual.swing.layouts.GroupLayout;
 import org.dyno.visual.swing.layouts.Leading;
 import org.dyno.visual.swing.layouts.Trailing;
+
+import de.noonex.moddropplugin.conditions.WorldCondition;
 
 //VS4E -- DO NOT REMOVE THIS LINE!
 public class DropSettings extends JDialog
@@ -204,6 +208,12 @@ public class DropSettings extends JDialog
 		if (jButton2 == null) {
 			jButton2 = new JButton();
 			jButton2.setText("Add condition");
+			jButton2.addActionListener(new ActionListener() {
+	
+				public void actionPerformed(ActionEvent event) {
+					jButton2ActionActionPerformed(event);
+				}
+			});
 		}
 		return jButton2;
 	}
@@ -294,6 +304,13 @@ public class DropSettings extends JDialog
 			cmbBlockId.setRequestFocusEnabled(false);
 		}
 		return cmbBlockId;
+	}
+
+	private void jButton2ActionActionPerformed(ActionEvent event) {
+		//add condition
+		ConditionSettings cond = new ConditionSettings();
+		cond.setCondition(new WorldCondition("world"));
+		cond.setVisible(true);
 	}
 
 }

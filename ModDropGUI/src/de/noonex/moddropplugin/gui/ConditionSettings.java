@@ -15,14 +15,13 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import org.dyno.visual.swing.layouts.Constraints;
 import org.dyno.visual.swing.layouts.GroupLayout;
 import org.dyno.visual.swing.layouts.Leading;
 import org.dyno.visual.swing.layouts.Trailing;
-
-import com.avaje.ebean.TxType;
 
 import de.noonex.moddropplugin.conditions.Condition;
 import de.noonex.moddropplugin.conditions.ConditionParser;
@@ -154,7 +153,7 @@ public class ConditionSettings extends JDialog
 		add(getJComboBox0(), new Constraints(new Trailing(12, 236, 54, 54), new Leading(12, 12, 12)));
 		add(getJButton0(), new Constraints(new Leading(12, 12, 12), new Leading(73, 12, 12)));
 		add(getJButton1(), new Constraints(new Leading(81, 12, 12), new Leading(73, 12, 12)));
-		setSize(320, 111);
+		setSize(320, 145);
 	}
 
 	private JButton getJButton1() {
@@ -226,13 +225,27 @@ public class ConditionSettings extends JDialog
 		return this.cancelled;
 	}
 	
+	private boolean ConditionParsable()
+	{
+		try
+		{
+			getCondition();
+			return true;
+		}
+		catch (ParseException e)
+		{
+			JOptionPane.showMessageDialog(this, "The key or the value are invalid (Error Message: " + e.getMessage() + ").");
+			return false;
+		}
+	}
+	
 	public Condition getCondition() throws ParseException
 	{
 		Condition newCondition;
 		try
 		{
 			//improve
-			newCondition = ConditionParser.ParseConditions(((String)jComboBox0.getSelectedItem()) + "" + jTextField0.getText())[0];
+			newCondition = ConditionParser.ParseConditions(((String)jComboBox0.getSelectedItem()) + ":" + jTextField0.getText())[0];
 		}
 		catch (ParseException e)
 		{
@@ -262,8 +275,11 @@ public class ConditionSettings extends JDialog
 
 	private void jButton0ActionActionPerformed(ActionEvent event) {
 		//OK
-		this.cancelled = false;
-		this.setVisible(false);
+		if(ConditionParsable())
+		{
+			this.cancelled = false;
+			this.setVisible(false);
+		}
 	}
 
 	private void jButton1ActionActionPerformed(ActionEvent event) {
