@@ -40,10 +40,6 @@ public class NormalDrop extends AbstractDrop
 			{
 				ItemStack dropItems = new ItemStack(dropType, 1, damageData, damageData);
 				world.dropItemNaturally(loc, dropItems);
-				
-				//DEBUG
-				System.out.println("[ModDrop][INFO]Item dropped: " + dropType.toString() + ":" + damageData);
-				//DEBUG END
 			}
 		});
 

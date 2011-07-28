@@ -40,7 +40,7 @@ public class DropStringParser
 			catch(ParseException ex)
 			{
 				//print warning, ignore conditions
-				System.out.println("[ModDrop][WARNING] Bad conditions.");
+				System.out.println("[ModDrop][WARNING] Bad conditions: " + str);
 			}
 			
 			arguments = configurationString[0].split(":");
@@ -230,10 +230,6 @@ public class DropStringParser
 						"Bad format: Damage-value is not a number or is too big: " + damagedDropStringArr[1],
 						0);
 			}
-			
-			//DEBUG
-			System.out.println("[ModDrop][INFO]Damage parsed: " + damageData);
-			//DEBUG END
 		}
 
 		try
