@@ -3,9 +3,6 @@ main: de.noonex.moddropplugin.ModDropPlugin
 version: 0.6
 
 commands:
-    moddrop:
-        description: Enable or disable glass drops.
-        usage: /moddrop
-    refreshmoddrop:
-        description: Reload the config.yml file.
-        usage: /refreshmoddrop
+    md:
+        description: Toggle ModDrop or reload the config file. Use /md list to list possible commands.
+        usage: /md command

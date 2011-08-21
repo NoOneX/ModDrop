@@ -11,10 +11,17 @@ public abstract class AbstractCommand
 	{
 		this.name = name;
 		this.aliases = aliases;
+		this.RegisterCommand();
 	}
 	
-	public abstract void ExecuteCommand(ModDropPlugin plugin);
-	public abstract void ExecuteCommand(ModDropPlugin plugin, String ...parameters);
+	private void RegisterCommand()
+	{
+		CommandHandler commandHandler = CommandHandler.getInstance();
+		commandHandler.AddCommand(name, this, aliases);
+	}
+	
+	public abstract String ExecuteCommand(ModDropPlugin plugin);
+	public abstract String ExecuteCommand(ModDropPlugin plugin, String ...parameters);
 	
     public String GetDescription()
     {

@@ -6,6 +6,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Server;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.Event.Type;
@@ -13,14 +14,18 @@ import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import de.noonex.moddropplugin.commands.CommandHandler;
+
 public class ModDropPlugin extends JavaPlugin
 {
 	private Logger log = null;
 	private PluginManager pm;
-	ConfigurationManager configManager;
+	private ConfigurationManager configManager;
 	private Server server;
 	
-	Boolean moddrop;
+	private CommandHandler commandHandler;
+	
+	private Boolean moddrop;
 	
 	private ModDropPluginBlockListener stpBlockListener;
 
@@ -46,6 +51,8 @@ public class ModDropPlugin extends JavaPlugin
 		moddrop = configManager.getModDrop();
 		stpBlockListener.setDropGlass(moddrop);
 		
+		RegisterCommands();
+		
 		pm = server.getPluginManager();
 		pm.registerEvent(Type.BLOCK_BREAK, stpBlockListener, Event.Priority.Lowest, this);
 		pm.registerEvent(Type.PLUGIN_ENABLE, PluginHookManager.getInstance(), Event.Priority.Monitor, this);
@@ -54,22 +61,37 @@ public class ModDropPlugin extends JavaPlugin
 		log.info(String.format("ModDropPlugin (v.%s) by NoOneX enabled.", description.getVersion()));
 	}
 	
+	private void RegisterCommands()
+	{
+		commandHandler = CommandHandler.getInstance();
+		
+		
+	}
+
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args)
 	{
-		if(!cmd.getName().equalsIgnoreCase("moddrop") && !cmd.getName().equalsIgnoreCase("refreshmoddrop"))
+		if(!cmd.getName().equalsIgnoreCase("md"))
 		{
 			return false;
 		}
 		
-		if(!(sender instanceof Player))
+		if(!sender.isOp())
 		{
+			sender.sendMessage(ChatColor.RED + "You have not the necessary rights to use this command.");
 			return true;
 		}
 		
-		Player player = (Player) sender;
+		String commandString = "";
 		
-		if(!player.isOp())
+		for(String param: args)
+		{
+			commandString += param + " ";
+		}
+		
+		sender.sendMessage(commandHandler.ProcessCommand(commandString, this));
+		
+		/*if(!player.isOp())
 		{
 			player.sendMessage(ChatColor.RED + "You have not the necessary rights to use this command.");
 			return true;
@@ -92,8 +114,9 @@ public class ModDropPlugin extends JavaPlugin
 		configManager.setModDrop(moddrop);
 		
 		servermessage = String.format("%sModDrop is %s%s%s (changed by %s).", ChatColor.GOLD, ChatColor.AQUA, state, ChatColor.GOLD, playerName);
-		getServer().broadcastMessage(servermessage);
+		getServer().broadcastMessage(servermessage);*/
 		
 		return true;
 	}
 }
+
