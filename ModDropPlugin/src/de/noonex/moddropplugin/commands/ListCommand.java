@@ -1,26 +1,35 @@
 package de.noonex.moddropplugin.commands;
 
+import java.util.Map;
+
 import de.noonex.moddropplugin.ModDropPlugin;
 
 public class ListCommand extends AbstractCommand
 {	
+	private Map<String, AbstractCommand> commands;
+	
 	public ListCommand()
 	{
 		super("list", "commands");
+		this.commands = CommandHandler.getInstance().GetCommands();
 	}
 
 	@Override
 	public String ExecuteCommand(ModDropPlugin plugin)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		String commandList = "";
+		
+		for(AbstractCommand command: commands.values())
+		{
+			commandList += String.format("%s: %s%s", command.GetName(), command.GetDescription(), System.getProperty("line.separator"));
+		}
+		
+		return commandList;
 	}
 
 	@Override
 	public String ExecuteCommand(ModDropPlugin plugin, String... parameters)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return this.ExecuteCommand(plugin);
 	}
-
 }

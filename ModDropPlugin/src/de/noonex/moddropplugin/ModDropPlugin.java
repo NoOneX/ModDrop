@@ -1,5 +1,6 @@
 package de.noonex.moddropplugin;
 
+import java.awt.List;
 import java.util.logging.Logger;
 
 import org.bukkit.ChatColor;
@@ -15,6 +16,9 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import de.noonex.moddropplugin.commands.CommandHandler;
+import de.noonex.moddropplugin.commands.HelpCommand;
+import de.noonex.moddropplugin.commands.ListCommand;
+import de.noonex.moddropplugin.commands.UsageCommand;
 
 public class ModDropPlugin extends JavaPlugin
 {
@@ -64,8 +68,9 @@ public class ModDropPlugin extends JavaPlugin
 	private void RegisterCommands()
 	{
 		commandHandler = CommandHandler.getInstance();
-		
-		
+		new HelpCommand();
+		new UsageCommand();
+		new ListCommand();		
 	}
 
 	@Override
@@ -83,13 +88,19 @@ public class ModDropPlugin extends JavaPlugin
 		}
 		
 		String commandString = "";
+		String senderMessage;
 		
 		for(String param: args)
 		{
 			commandString += param + " ";
 		}
 		
-		sender.sendMessage(commandHandler.ProcessCommand(commandString, this));
+		senderMessage = commandHandler.ProcessCommand(commandString, this);
+		
+		for(String messagePart: senderMessage.split(System.getProperty("line.separator")))
+		{		
+			sender.sendMessage(messagePart);
+		}
 		
 		/*if(!player.isOp())
 		{

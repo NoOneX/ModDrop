@@ -26,6 +26,11 @@ public class CommandHandler
 	private Map<String, AbstractCommand> commands;
 	private AbstractCommand defaultCommand;
 	
+	protected Map<String, AbstractCommand> GetCommands()
+	{
+		return this.commands;
+	}
+	
 	public void SetDefaultCommand(AbstractCommand command)
 	{
 		defaultCommand = command;
@@ -76,7 +81,7 @@ public class CommandHandler
 	{
 		String commandParts[] = commandString.split(" ");
 		
-		if(commandParts.length == 1)
+		if(commandParts.length == 0)
 		{
 			if(defaultCommand == null)
 			{

@@ -43,4 +43,9 @@ public abstract class AbstractCommand
     	usage = String.format("The command %s does not provide an usage example.", name);
         return usage;
     }
+    
+    public String GetName()
+    {
+    	return this.name;
+    }
 }
