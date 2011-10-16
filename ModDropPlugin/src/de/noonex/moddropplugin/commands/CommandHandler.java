@@ -3,8 +3,6 @@ package de.noonex.moddropplugin.commands;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.bukkit.plugin.java.JavaPlugin;
-
 import de.noonex.moddropplugin.ModDropPlugin;
 
 public class CommandHandler

@@ -1,14 +1,11 @@
 package de.noonex.moddropplugin;
 
-import java.awt.List;
 import java.util.logging.Logger;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Server;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.command.ConsoleCommandSender;
-import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.Event.Type;
 import org.bukkit.plugin.PluginDescriptionFile;
@@ -18,6 +15,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import de.noonex.moddropplugin.commands.CommandHandler;
 import de.noonex.moddropplugin.commands.HelpCommand;
 import de.noonex.moddropplugin.commands.ListCommand;
+import de.noonex.moddropplugin.commands.ToggleCommand;
 import de.noonex.moddropplugin.commands.UsageCommand;
 
 public class ModDropPlugin extends JavaPlugin
@@ -32,6 +30,16 @@ public class ModDropPlugin extends JavaPlugin
 	private Boolean moddrop;
 	
 	private ModDropPluginBlockListener stpBlockListener;
+	
+	public Boolean getModDrop()
+	{
+		return this.moddrop;
+	}
+	
+	public void setModDrop(Boolean moddrop)
+	{
+		this.moddrop = moddrop;
+	}
 
 	@Override
 	public void onDisable()
@@ -48,7 +56,7 @@ public class ModDropPlugin extends JavaPlugin
 		moddrop = false;
 		server = getServer();
 		
-		configManager = new ConfigurationManager(getConfiguration());
+		configManager = new ConfigurationManager(getConfig(), this);
 		PluginHookManager.getInstance().setPlugin(this);
 		
 		stpBlockListener = new ModDropPluginBlockListener(log, moddrop, configManager.getDropList());
@@ -70,7 +78,8 @@ public class ModDropPlugin extends JavaPlugin
 		commandHandler = CommandHandler.getInstance();
 		new HelpCommand();
 		new UsageCommand();
-		new ListCommand();		
+		new ListCommand();
+		commandHandler.SetDefaultCommand(new ToggleCommand());
 	}
 
 	@Override
