@@ -3,7 +3,8 @@ package de.noonex.moddropplugin;
 import java.text.ParseException;
 import java.util.HashMap;
 
-import org.bukkit.util.config.Configuration;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.plugin.java.JavaPlugin;
 
 import de.noonex.moddropplugin.drops.AbstractDrop;
 import de.noonex.moddropplugin.drops.DropSetting;
@@ -12,12 +13,13 @@ import de.noonex.moddropplugin.drops.MultipleDrop;
 
 public class ConfigurationManager
 {
-	private Configuration config;
+	private FileConfiguration config;
+	private JavaPlugin modDrop;
 	
-	public ConfigurationManager(Configuration config)
+	public ConfigurationManager(FileConfiguration config, JavaPlugin modDrop)
 	{
 		this.config = config;
-		this.config.load();
+		this.modDrop = modDrop;
 	}
 	
 	public boolean getModDrop()
@@ -27,17 +29,17 @@ public class ConfigurationManager
 	
 	public void setModDrop(boolean value)
 	{
-		this.config.setProperty("moddrop_on", value);
+		this.config.set("moddrop_on", value);
 	}
 	
 	public void SaveConfiguration()
 	{
-		this.config.save();
+		this.modDrop.saveConfig();
 	}
 	
 	public void LoadConfiguration()
 	{
-		this.config.load();
+		this.modDrop.reloadConfig();
 	}
 	
 	public HashMap<Integer, AbstractDrop> getDropList()
