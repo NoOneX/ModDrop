@@ -7,13 +7,13 @@ import org.bukkit.event.server.PluginEnableEvent;
 import org.bukkit.event.server.ServerListener;
 import org.bukkit.plugin.Plugin;
 
-import com.iConomy.iConomy;
+import com.nijikokun.register.Register;
 
 //Singleton
 public final class PluginHookManager extends ServerListener
 {
 	//TODO: Use a hash map with Plugins?
-	private iConomy iconomy = null;
+	private Register register = null;
 	private ModDropPlugin plugin = null;
 	private static PluginHookManager _instance = new PluginHookManager();
 	
@@ -25,16 +25,16 @@ public final class PluginHookManager extends ServerListener
 	@Override
 	public void onPluginEnable(PluginEnableEvent event)
 	{
-		if(!IsiConomyAvailable() && IsPluginSet())
+		if(!IsRegisterAvailable() && IsPluginSet())
 		{
-			Plugin icon = plugin.getServer().getPluginManager().getPlugin("iConomy");
+			Plugin reg = plugin.getServer().getPluginManager().getPlugin("Register");
 			
-			if(icon != null)
+			if(reg != null)
 			{
-				if(icon.isEnabled() && icon.getClass().getName().equals("com.iConomy.iConomy"))
+				if(reg.isEnabled() && reg.getClass().getName().equals("com.nijikokun.register.Register"))
 				{
-					this.iconomy = (iConomy)icon;
-					System.out.println("[ModDropPlugin]: Enabled iConomy support.");
+					this.register = (Register)reg;
+					System.out.println("[ModDropPlugin]: Enabled economy support.");
 				}
 			}
 		}
@@ -43,12 +43,12 @@ public final class PluginHookManager extends ServerListener
 	@Override
 	public void onPluginDisable(PluginDisableEvent event)
 	{
-		if(IsiConomyAvailable())
+		if(IsRegisterAvailable())
 		{
-			if(event.getPlugin().getDescription().getName().equals("iConomy"))
+			if(event.getPlugin().getDescription().getName().equals("Register"))
 			{
-				this.iconomy = null;
-				System.out.println("[ModDropPlugin]: Un-hooked from iConomy.");
+				this.register = null;
+				System.out.println("[ModDropPlugin]: Disabled economy support.");
 			}
 		}
 	}
@@ -68,20 +68,21 @@ public final class PluginHookManager extends ServerListener
 		return _instance;
 	}
 	
-	public boolean IsiConomyAvailable()
+	public boolean IsRegisterAvailable()
 	{
-		return !(iconomy == null);
+		//TODO: Use another method?
+		return !(register == null);
 	}
 	
-	public iConomy getiConomy() throws OperationNotSupportedException
+	public Register getRegister() throws OperationNotSupportedException
 	{
-		if(IsiConomyAvailable())
+		if(IsRegisterAvailable())
 		{
-			return iconomy;
+			return register;
 		}
 		else
 		{
-			throw new OperationNotSupportedException("iConomy-support is not available.");
+			throw new OperationNotSupportedException("Economy-support is not available.");
 		}
 	}
 }

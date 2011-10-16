@@ -1,13 +1,12 @@
 package de.noonex.moddropplugin.drops;
 
-import javax.naming.OperationNotSupportedException;
-
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 
-import com.iConomy.iConomy;
-import com.iConomy.system.Holdings;
+import com.nijikokun.register.payment.Method;
+import com.nijikokun.register.payment.Method.MethodAccount;
+import com.nijikokun.register.payment.Methods;
 
 import de.noonex.moddropplugin.PluginHookManager;
 import de.noonex.moddropplugin.amount.IAmountable;
@@ -17,7 +16,6 @@ public class iConomyDrop extends AbstractDrop {
 	public iConomyDrop()
 	{	}
 
-	@SuppressWarnings("static-access")
 	@Override
 	public void CreateDrop(final Location loc, final World world, final Player player, boolean checkConditions)
 	{
@@ -32,7 +30,7 @@ public class iConomyDrop extends AbstractDrop {
 		
 		final PluginHookManager pluginhook = PluginHookManager.getInstance();
 		
-		if(pluginhook.IsiConomyAvailable())
+		if(pluginhook.IsRegisterAvailable())
 		{
 			this.amount.Do(new IAmountable()
 			{
@@ -40,20 +38,18 @@ public class iConomyDrop extends AbstractDrop {
 				@Override
 				public void Do(Object param)
 				{
-					// TODO Auto-generated method stub
-					try
+					Method paymentMethod = Methods.getMethod();
+					String playerName = player.getName();
+					MethodAccount playerAccount;
+						
+					if(!paymentMethod.hasAccount(playerName))
 					{
-						iConomy icon = pluginhook.getiConomy();
-						Holdings playerBalance = icon.getAccount(
-								player.getName()).getHoldings();
-
-						playerBalance.add((Double) param);
+						//TODO: Check the result value?
+						paymentMethod.createAccount(playerName);
 					}
-					catch (OperationNotSupportedException e)
-					{
-						// do nothing
-						e.printStackTrace();
-					}
+					
+					playerAccount = paymentMethod.getAccount(playerName);
+					playerAccount.add((Double) param);
 				}
 			});
 
