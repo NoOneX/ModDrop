@@ -104,7 +104,7 @@ public class ModDropPlugin extends JavaPlugin
 			commandString += param + " ";
 		}
 		
-		senderMessage = commandHandler.ProcessCommand(commandString, this);
+		senderMessage = commandHandler.ProcessCommand(commandString, this, sender);
 		
 		for(String messagePart: senderMessage.split(System.getProperty("line.separator")))
 		{		

@@ -11,19 +11,19 @@ public class UsageCommand extends AbstractCommand
 	
 	public UsageCommand()
 	{
-		super("usage");
+		super("usage", "noonex.moddrop.usage");
 		commandHandler = CommandHandler.getInstance();
 		commands = commandHandler.GetCommands();
 	}
 
 	@Override
-	public String ExecuteCommand(ModDropPlugin plugin)
+	protected String ExecuteCommand(ModDropPlugin plugin)
 	{
 		return this.GetHelp();
 	}
 
 	@Override
-	public String ExecuteCommand(ModDropPlugin plugin, String... parameters)
+	protected String ExecuteCommand(ModDropPlugin plugin, String... parameters)
 	{
 		if(parameters.length > 2)
 		{

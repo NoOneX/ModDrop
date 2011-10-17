@@ -3,6 +3,8 @@ package de.noonex.moddropplugin.commands;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.bukkit.command.CommandSender;
+
 import de.noonex.moddropplugin.ModDropPlugin;
 
 public class CommandHandler
@@ -75,7 +77,7 @@ public class CommandHandler
 		return commands.containsKey(name.toLowerCase());
 	}
 	
-	public String ProcessCommand(String commandString, ModDropPlugin plugin)
+	public String ProcessCommand(String commandString, ModDropPlugin plugin, CommandSender sender)
 	{
 		String commandParts[] = commandString.split(" ");
 		
@@ -88,7 +90,7 @@ public class CommandHandler
 			}
 			else
 			{
-				return defaultCommand.ExecuteCommand(plugin);
+				return defaultCommand.ExecuteCommandWithPermissions(plugin, sender);
 			}
 		}
 		
@@ -104,11 +106,11 @@ public class CommandHandler
 		
 		if(commandParts.length == 1)
 		{
-			return command.ExecuteCommand(plugin);
+			return command.ExecuteCommandWithPermissions(plugin, sender);
 		}
 		else
 		{
-			return command.ExecuteCommand(plugin, commandParts);
+			return command.ExecuteCommandWithPermissions(plugin, sender, commandParts);
 		}
 	}
 }

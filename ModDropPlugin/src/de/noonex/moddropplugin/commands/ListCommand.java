@@ -10,12 +10,12 @@ public class ListCommand extends AbstractCommand
 	
 	public ListCommand()
 	{
-		super("list", "commands");
+		super("list", "noonex.moddrop.usage", "commands");
 		this.commands = CommandHandler.getInstance().GetCommands();
 	}
 
 	@Override
-	public String ExecuteCommand(ModDropPlugin plugin)
+	protected String ExecuteCommand(ModDropPlugin plugin)
 	{
 		String commandList = "";
 		
@@ -29,7 +29,7 @@ public class ListCommand extends AbstractCommand
 	}
 
 	@Override
-	public String ExecuteCommand(ModDropPlugin plugin, String... parameters)
+	protected String ExecuteCommand(ModDropPlugin plugin, String... parameters)
 	{
 		return this.ExecuteCommand(plugin);
 	}
