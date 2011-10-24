@@ -11,7 +11,7 @@ public class HelpCommand extends AbstractCommand
 	
 	public HelpCommand()
 	{
-		super("help", "noonex.moddrop.usage", "man");
+		super("help", "noonex.moddrop.help", "man");
 		commandHandler = CommandHandler.getInstance();
 		commands = commandHandler.GetCommands();
 	}

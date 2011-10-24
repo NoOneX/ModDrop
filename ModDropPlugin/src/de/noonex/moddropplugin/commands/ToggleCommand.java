@@ -2,14 +2,12 @@ package de.noonex.moddropplugin.commands;
 
 import de.noonex.moddropplugin.ModDropPlugin;
 
-//TODO: Add usage and help methods!
-
 public class ToggleCommand extends AbstractCommand
 {
 
 	public ToggleCommand()
 	{
-		super("toggle", "noonex.moddrop.usage", "switch", "onoff");
+		super("toggle", "noonex.moddrop.toggle", "switch", "onoff");
 	}
 
 	@Override
@@ -27,6 +25,21 @@ public class ToggleCommand extends AbstractCommand
 	protected String ExecuteCommand(ModDropPlugin plugin, String... parameters)
 	{
 		return ExecuteCommand(plugin);
+	}
+	
+	public String GetHelp()
+	{
+		return "This command enables/disables ModDrop.";
+	}
+	
+	public String GetUsage()
+	{
+		return "Usage: toggle";
+	}
+
+	public String GetDescription()
+	{
+		return this.GetHelp();
 	}
 
 }
